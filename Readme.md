@@ -18,7 +18,7 @@ CLI utility that uses [Nightmare.js](https://nightmarejs.org) and the [nightmare
 
 ## Use cases
 - integration testing (are specific requests being made? how often?)
-- performance testing (HAR contains number detailed timing information of network requests)
+- performance testing (HAR contains detailed timing information of the network requests)
 - getting page weight, number of js / css / ajax / font / ... requests
 
 
@@ -53,7 +53,7 @@ The `network-har.sh` (docker's image entrypoint) can be used to headlessly retri
 [Jq](https://stedolan.github.io/jq/) command line JSON preprocessor is already installed on the provided docker image, so the json HAR output can be very easily parsed inside the container.
 
 ### API
-The following commands can be interchangable, but they depend on the executing environment:
+The following commands can be interchangeable, but they depend on the executing environment:
 - `network-har [options]` (if nodejs is available and the `network-har` npm package is installed and if the environment already has an X server -> many ifs)
 - `docker run --rm alexbardas/network-har [options]` (if docker is installed)
 - `./network-har.sh [options]` (inside a docker container created from the provided image. Useful in a CI step)
@@ -134,6 +134,7 @@ Retrieve the network HAR for hackernews for:
 ```
 docker run --rm alexbardas/network-har \
   --url https://news.ycombinator.com \
+  --useragent "network-har" \
   --viewport 1024,768 \
   --header "Cache-Control:no-cache" \
   --header "Accept-Language:en-US" \
