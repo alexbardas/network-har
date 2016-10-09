@@ -1,7 +1,11 @@
 {
   "name": "network-har",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "CLI utility to retrieve network activity in HAR (HTTP Archive) format",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexbardas/network-har.git"
+  },
   "keywords": [
     "har",
     "network",
