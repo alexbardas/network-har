@@ -2,6 +2,7 @@ network-har
 ===========
 
 [![Build Status](https://travis-ci.org/alexbardas/network-har.svg?branch=master)](https://travis-ci.org/alexbardas/network-har)
+[![Docker Pulls](https://img.shields.io/docker/pulls/alexbardas/network-har.svg)](https://hub.docker.com/r/alexbardas/network-har)
 
 - [What is network-har?](#what-is-network-har)
 - [Use cases](#use-cases)
