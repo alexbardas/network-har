@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 let program = require('commander')
 let Nightmare = require('nightmare')
 let harPlugin = require('nightmare-har-plugin')
