@@ -1,2 +1,16 @@
 #!/bin/bash
-xvfb-run --server-args="-screen 0 1920x2000x24" node bin/network-har "$@"
+
+# check if one of the arguments is --debug
+for arg in "$@"; do
+  if [[ $arg == "--debug" ]]; then DEBUG=true; break; fi
+done
+unset arg
+
+if [[ -n $DEBUG ]]
+then
+  source headless/debug.sh "$@"
+else
+  source headless/xvfb.sh "$@"
+fi
+
+wait $PID 2>/dev/null

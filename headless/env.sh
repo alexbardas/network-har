@@ -1,0 +1,7 @@
+#!/bin/bash
+
+export SCREEN_WIDTH=1440
+export SCREEN_HEIGHT=900
+export SCREEN_DEPTH=24
+export DISPLAY=:99.0
+export GEOMETRY="$SCREEN_WIDTH""x""$SCREEN_HEIGHT""x""$SCREEN_DEPTH"

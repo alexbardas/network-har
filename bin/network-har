@@ -33,6 +33,7 @@ let parseOption = (option, accumulator, castFn, delim, convertTo, str) => {
 
 program
   .version(version)
+  .option('--debug', 'Start VNC server on port 5900 to be able to debug electron easier when running inside docker in headless mode')
   .option('--header [string:string]', 'Add key value header to the initial request (default: not set)', parseOption.bind(null, 'header', headers, String, ':', toObj), {})
   .option('--retries [number]', 'Number of maximum retries in case of network errors (default: 2)', Number, 2)
   .option('--url <string>', 'Website url (required)')
@@ -51,6 +52,15 @@ if (!program.url) {
   program.goto = [program.url, headers]
 }
 
+// If wait time in ms in greater than the maximum timeout
+// increase the maximum timeout to not throw error
+if (!isNaN(program.wait)) {
+  program.wait = Number(program.wait)
+  if (config.waitTimeout < program.wait) {
+    config.waitTimeout = program.wait
+  }
+}
+
 // The network-har plugin needs to be installed before Nightmare is initialized
 harPlugin.install(Nightmare)
 
@@ -60,11 +70,11 @@ let run = (retries = 0) => {
     .then((result) => console.log(JSON.stringify(result)))
     .catch((error) => {
       if (retries > 0) {
-        console.error('Error: ', error)
+        console.error('Error: ', program.debug ? error : error.message)
         console.error(`${retries} more ${retries > 1 ? 'retries' : 'retry'} available. Retrying ...`)
         run(retries - 1)
       } else {
-        console.error('Error: ', error)
+        console.error('Error: ', program.debug ? error : error.message)
         process.exit(1)
       }
     })
