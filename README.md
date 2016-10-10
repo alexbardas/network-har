@@ -141,3 +141,9 @@ docker run --rm alexbardas/network-har \
   --retries 3 \
   --wait "#hnmain"
 ```
+
+## Contributing
+
+1. `Network-har` is an open source project and welcome contributions.
+
+2. See [CONTRIBUTING.md](https://github.com/alexbardas/network-har/blob/master/CONTRIBUTING.md) to get your local environment set up.
