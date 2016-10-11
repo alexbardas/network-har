@@ -9,6 +9,7 @@ network-har
 - [Getting started](#getting-started)
 - [Options](#options)
 - [Examples](#examples)
+- [Debugging](#debugging)
 - [Contributing](#contributing)
 
 
@@ -66,6 +67,12 @@ Prints detailed help information.
 docker run --rm alexbardas/network-har --help
 ```
 
+##### `--debug` (optional, no extra arguments)
+Opens a minimal window manager ([`jwm`](http://joewing.net/projects/jwm/)) and a vnc server ([`x11vnc`](http://www.karlrunge.com/x11vnc/)) in the docker container to allow remote debugging. Connect with a vnc viewer to localhost:5900 using the password `secret`.
+Free VNC viewers:
+- for macOS: Screen Sharing (comes with every macOS version)
+- for windows: [TightVNC](http://www.tightvnc.com/)
+
 ##### `--url string` (required)
 The website for which the har information is needed.
 ```sh
@@ -119,7 +126,7 @@ Waits for a specific element defined by a string selector to be available in the
 ```sh
 docker run --rm alexbardas/network-har \
   --url https://news.ycombinator.com \
-  --wait "#hnmain"
+  --wait 5000
 ```
 
 ## Examples
@@ -141,6 +148,13 @@ docker run --rm alexbardas/network-har \
   --retries 3 \
   --wait "#hnmain"
 ```
+
+## Debugging
+Nodejs binary:
+- It's most likely in this case that a X Window System is already present. Because it needs to open devtools in order to record the network activity and devtools works only when the electron browser is displayed, the debugging should be done directly in this environment.
+
+Docker image:
+- There is an extra option which allows remote debugging: `--debug`. An extra window manager and vnc server are started in order to enable debugging from the user's host machine inside the docker container.
 
 ## Contributing
 
